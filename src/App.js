@@ -1,7 +1,14 @@
-import './App.css';
+import Galery from 'components/Galery';
+import Loader from 'components/Loader';
+// import './App.css';
 
 function App() {
-  return <div className="App">Hello World!</div>;
+  return (
+    <>
+      <Loader />
+      <Galery />
+    </>
+  );
 }
 
 export default App;
