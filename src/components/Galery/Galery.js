@@ -1,46 +1,55 @@
 import React from 'react';
 import ImageCard from 'components/ImageCard';
-import { galleryImages } from 'resources/images';
-import { rowHeight, imagePadding, containerMaxWidth } from 'restrictions';
+import { useSelector } from 'react-redux';
+import { rowNormalHeight } from 'restrictions';
+import { contentWindowWidth, galleryImagesSelector } from 'redux/selectors';
 import './galery.css';
 
 export default function Galery() {
-  calcRowScale();
+  const galery = useSelector(galleryImagesSelector);
+  const contentWidth = useSelector(contentWindowWidth);
+  console.log(contentWidth);
+
+  const getCardWidth = (imgWidth, imgHeight) => (rowNormalHeight / imgHeight) * imgWidth;
+
+  const getRowsScaleArr = (imagesArr) => {
+    let rowNumber = 0;
+    const rowsWidth = imagesArr.reduce((acc, image) => {
+      const cardWidth = getCardWidth(image.width, image.height);
+      if (!acc[rowNumber]) acc[rowNumber] = 0;
+      if (acc[rowNumber] + cardWidth > contentWidth) acc[++rowNumber] = cardWidth;
+      else acc[rowNumber] = acc[rowNumber] + cardWidth;
+      return acc;
+    }, []);
+    return rowsWidth.map((rowWidth, rowNumber) => {
+      if (rowNumber === rowsWidth.length - 1) return 1;
+      return contentWidth / rowWidth;
+    });
+  };
+
+  const getRowScale = (imagesArr, imageIndex) => {
+    let rowNumber = 0;
+    let rowWidth = 0;
+    for (let i = 0; i <= imageIndex; i++) {
+      const cardWidth = getCardWidth(imagesArr[i].width, imagesArr[i].height);
+      if (rowWidth + cardWidth > contentWidth) {
+        rowNumber++;
+        rowWidth = cardWidth;
+      } else rowWidth = rowWidth + cardWidth;
+    }
+    return getRowsScaleArr(imagesArr)[rowNumber];
+  };
 
   return (
-    <div className="galery" style={{ padding: imagePadding }}>
-      {galleryImages.map(({ url, width, height }) => {
-        const { cardWidth, cardHeigth } = calcCardSize(width, height);
-        return <ImageCard url={url} width={cardWidth} height={cardHeigth} key={url} />;
-      })}
+    <div className="galery">
+      {galery.map(({ url, width, height }, index) => (
+        <ImageCard
+          url={url}
+          cardWidth={getCardWidth(width, height)}
+          rowScale={getRowScale(galery, index)}
+          key={url}
+        />
+      ))}
     </div>
   );
 }
-
-const calcCardSize = (imgWidth, imgHeight) => {
-  const imageScale = rowHeight / imgHeight;
-  const cardWidth = Math.floor(imgWidth * imageScale * 1000) / 1000;
-  const cardHeigth = Math.floor(imgHeight * imageScale * 1000) / 1000;
-  return { cardWidth, cardHeigth };
-};
-
-const calcRowScale = () => {
-  const contentWidth =
-    window.innerWidth < containerMaxWidth ? window.innerWidth : containerMaxWidth;
-  let rowWidth = 0;
-  let rowScale = 1;
-
-  galleryImages.forEach((image) => {
-    const { cardWidth } = calcCardSize(image.width, image.height);
-
-    if (rowWidth + cardWidth > contentWidth) {
-      rowScale = Math.floor((contentWidth * 1000) / rowWidth) / 1000;
-      console.log('rowWidth:', rowWidth, ' rowScale:', rowScale);
-      rowWidth = cardWidth;
-    } else {
-      rowScale = 1;
-      rowWidth = rowWidth + cardWidth;
-    }
-  });
-  console.log('rowWidth:', rowWidth, ' rowScale:', rowScale);
-};

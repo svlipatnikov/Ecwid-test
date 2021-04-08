@@ -1,12 +1,23 @@
 import React from 'react';
-import { imagePadding } from 'restrictions';
+import { imagePadding, rowNormalHeight } from 'restrictions';
 import placeholder from 'resources/placeholder.png';
 import './imageCard.css';
+import { useSelector } from 'react-redux';
+import { contentWindowWidth } from 'redux/selectors';
 
-export default function ImageCard({ url, width, height }) {
+export default function ImageCard({ url, cardWidth, rowScale }) {
+  const contentWidth = useSelector(contentWindowWidth);
+
+  const fullWidth = cardWidth * rowScale > contentWidth;
+  const calcCardWidth = fullWidth ? contentWidth : cardWidth * rowScale;
+  const calcCardHeight = fullWidth
+    ? rowNormalHeight * (contentWidth / (cardWidth * rowScale))
+    : rowNormalHeight * rowScale;
+
+  if (fullWidth) console.log(calcCardWidth, url);
   const cardStyle = {
-    width: width + 'px',
-    height: height + 'px',
+    width: calcCardWidth + 'px',
+    height: calcCardHeight + 'px',
   };
 
   const imgStyle = {
@@ -19,8 +30,8 @@ export default function ImageCard({ url, width, height }) {
       <img
         src={url}
         alt="img"
-        width={width - imagePadding * 2 + 'px'}
-        height={height - imagePadding * 2 + 'px'}
+        width={calcCardWidth - imagePadding * 2 + 'px'}
+        height={calcCardHeight - imagePadding * 2 + 'px'}
         style={imgStyle}
       />
     </div>
