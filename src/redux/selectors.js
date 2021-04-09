@@ -1,6 +1,7 @@
+// galery
 export const galleryImagesSelector = (store) => store.imagesReducer.galleryImages;
-// export const imageRowNumberSelector = (store) => store.calcReducer.imageRowNumber;
-// export const rowsWidthSelector = (store) => store.calcReducer.rowsWidth;
-// export const rowsScaleSelector = (store) => store.calcReducer.rowsScale;
 
-export const contentWindowWidth = (store) => store.calcReducer.contentWidth;
+// calc
+export const contentWidthSelector = (store) => store.calcReducer.contentWidth;
+export const cardsSelector = (store) => store.calcReducer.cardsArr;
+export const rowsSelector = (store) => store.calcReducer.rowsArr;

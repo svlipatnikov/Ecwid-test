@@ -1,25 +1,15 @@
-import { SET_CONTENT_WIDTH } from '../types';
+import { SET_CALC_RESULT } from '../types';
 
 const calcReducerInit = {
   contentWidth: window.outerWidth,
-  // imageRowNumber: [],
-  // rowsWidth: [],
-  // rowsScale: [],
+  cardsArr: [],
+  rowsArr: [],
 };
 
 const calcReducer = (state = calcReducerInit, action) => {
   switch (action.type) {
-    case SET_CONTENT_WIDTH:
-      return { ...state, contentWidth: action.payload };
-
-    // case CALC_IMAGE_ROW_NUMBER:
-    //   return { ...state, imageRowNumber: action.payload };
-
-    // case CALC_ROWS_WIDTH:
-    //   return { ...state, rowsWidth: action.payload };
-
-    // case CALC_ROWS_SCALE:
-    //   return { ...state, rowsWidth: action.payload };
+    case SET_CALC_RESULT:
+      return { ...state, ...action.payload };
 
     default:
       return state;
