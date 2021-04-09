@@ -20,8 +20,9 @@ export default function Galery() {
       {galery.map((image, index) => (
         <ImageCard
           key={image.url}
+          index={index}
           url={image.url}
-          cardWidth={cards[index].cardNormalWidth}
+          cardNormalWidth={cards[index].cardNormalWidth}
           rowScale={contentWidth / rows[cards[index].rowNumber]}
           isLastRow={cards[index].rowNumber === rows.length - 1}
         />

@@ -1,26 +1,22 @@
 import React from 'react';
 import { imagePadding, rowMaxHeight, rowNormalHeight } from 'restrictions';
+import { useDispatch } from 'react-redux';
+import { deleteImageAction } from 'redux/actions/galeryAction';
+import deleteIcon from 'resources/delete.svg';
 import placeholder from 'resources/placeholder.png';
 import './imageCard.css';
-import { useSelector } from 'react-redux';
-import { contentWidthSelector } from 'redux/selectors';
 
-export default function ImageCard({ url, cardWidth, rowScale, isLastRow }) {
-  const contentWidth = useSelector(contentWidthSelector);
-  const fullWidth = cardWidth * rowScale > contentWidth; //картинка шире чем контент
+export default function ImageCard({ index, url, cardNormalWidth, rowScale, isLastRow }) {
+  const dispatch = useDispatch();
 
-  let calcCardWidth;
-  let calcCardHeight;
-  if (fullWidth) {
-    calcCardWidth = contentWidth;
-    calcCardHeight = rowNormalHeight * (contentWidth / (cardWidth * rowScale));
-  } else if (isLastRow && rowNormalHeight * rowScale > rowMaxHeight) {
-    calcCardWidth = cardWidth * (rowMaxHeight / rowNormalHeight);
-    calcCardHeight = rowMaxHeight;
-  } else {
-    calcCardWidth = cardWidth * rowScale;
-    calcCardHeight = rowNormalHeight * rowScale;
-  }
+  const calcCardWidth =
+    isLastRow && rowNormalHeight * rowScale > rowMaxHeight
+      ? rowMaxHeight * (cardNormalWidth / rowNormalHeight)
+      : cardNormalWidth * rowScale;
+  const calcCardHeight =
+    isLastRow && rowNormalHeight * rowScale > rowMaxHeight
+      ? rowMaxHeight
+      : rowNormalHeight * rowScale;
 
   const cardStyle = {
     width: calcCardWidth + 'px',
@@ -32,6 +28,10 @@ export default function ImageCard({ url, cardWidth, rowScale, isLastRow }) {
     backgroundSize: 'cover',
   };
 
+  const handleDelete = () => {
+    dispatch(deleteImageAction(index));
+  };
+
   return (
     <div style={cardStyle} className="card">
       <img
@@ -41,6 +41,9 @@ export default function ImageCard({ url, cardWidth, rowScale, isLastRow }) {
         height={calcCardHeight - imagePadding * 2 + 'px'}
         style={imgStyle}
       />
+      <button className="card__delete" onClick={handleDelete}>
+        <img src={deleteIcon} alt="Delete" />
+      </button>
     </div>
   );
 }

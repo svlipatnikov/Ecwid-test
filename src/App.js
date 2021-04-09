@@ -5,11 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCalcResultAction } from 'redux/actions/calcAction';
 import { galleryImagesSelector } from 'redux/selectors';
 
-// import './App.css';
-
 const App = () => {
   const galery = useSelector(galleryImagesSelector);
   const dispatch = useDispatch();
+  dispatch(setCalcResultAction(galery));
 
   useEffect(() => {
     const resizeEvent = () => {

@@ -11,7 +11,8 @@ const imagesReducer = (state = imagesReducerInit, action) => {
       return { ...state };
 
     case DELETE_IMAGE:
-      return { ...state };
+      const galery = state.galleryImages.filter((image, index) => index !== action.payload);
+      return { ...state, galleryImages: galery };
 
     default:
       return state;
