@@ -6,6 +6,7 @@ import { setCalcResultAction } from 'redux/actions/calcAction';
 import { galleryImagesSelector } from 'redux/selectors';
 
 const App = () => {
+  console.log('App');
   const galery = useSelector(galleryImagesSelector);
   const dispatch = useDispatch();
   dispatch(setCalcResultAction(galery));

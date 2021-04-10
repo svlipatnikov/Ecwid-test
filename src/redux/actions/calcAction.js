@@ -1,5 +1,10 @@
-import { SET_CALC_RESULT } from 'redux/types';
+import { SET_CALC_RESULT, SET_GALERY_WIDTH } from 'redux/types';
 import { containerMaxWidth, containerMinWidth, rowNormalHeight } from 'restrictions';
+
+export const setGaleryWidthAction = (galeryWidth) => ({
+  type: SET_GALERY_WIDTH,
+  payload: galeryWidth,
+});
 
 export const setCalcResultAction = (galery) => {
   // calc contentWidth
