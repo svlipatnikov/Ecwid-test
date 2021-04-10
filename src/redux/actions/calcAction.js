@@ -1,5 +1,8 @@
-import { SET_CALC_RESULT, SET_GALERY_WIDTH } from 'redux/types';
-import { containerMaxWidth, containerMinWidth, rowNormalHeight } from 'restrictions';
+import { IS_CHANGED, SET_CALC_RESULT, SET_GALERY_WIDTH } from 'redux/types';
+import { rowNormalHeight } from 'restrictions';
+import store from 'redux/store';
+
+export const isChangedAction = () => ({ type: IS_CHANGED });
 
 export const setGaleryWidthAction = (galeryWidth) => ({
   type: SET_GALERY_WIDTH,
@@ -7,11 +10,8 @@ export const setGaleryWidthAction = (galeryWidth) => ({
 });
 
 export const setCalcResultAction = (galery) => {
-  // calc contentWidth
-  let contentWidth;
-  if (window.outerWidth < containerMinWidth) contentWidth = containerMinWidth;
-  else if (window.outerWidth > containerMaxWidth) contentWidth = containerMaxWidth;
-  else contentWidth = window.outerWidth;
+  // get galeryWidth
+  const galeryWidth = store.getState().calcReducer.galeryWidth;
 
   // calc cardsArr & rowsArr
   const cardsArr = [];
@@ -22,7 +22,7 @@ export const setCalcResultAction = (galery) => {
   galery.forEach((image, index) => {
     const cardNormalWidth = (rowNormalHeight / image.height) * image.width;
 
-    if (rowWidth + cardNormalWidth > contentWidth) {
+    if (rowWidth + cardNormalWidth > galeryWidth) {
       rowNumber++;
       rowWidth = cardNormalWidth;
     } else {
@@ -42,6 +42,6 @@ export const setCalcResultAction = (galery) => {
 
   return {
     type: SET_CALC_RESULT,
-    payload: { contentWidth, cardsArr, rowsArr },
+    payload: { cardsArr, rowsArr },
   };
 };
