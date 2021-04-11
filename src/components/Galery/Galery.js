@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   cardsSelector,
   galeryWidthSelector,
-  isChangedSelector,
+  isChangedCalcSelector,
   rowsSelector,
   galleryImagesSelector,
 } from 'redux/selectors';
@@ -14,8 +14,7 @@ import { setCalcResultAction, setGaleryWidthAction } from 'redux/actions/calcAct
 export default function Galery() {
   const galery = useSelector(galleryImagesSelector);
   const galeryWidth = useSelector(galeryWidthSelector);
-
-  const isChanged = useSelector(isChangedSelector);
+  const isChanged = useSelector(isChangedCalcSelector);
 
   const dispatch = useDispatch();
   const galeryRef = useRef(null);
@@ -36,7 +35,7 @@ export default function Galery() {
 
   const cards = useSelector(cardsSelector);
   const rows = useSelector(rowsSelector);
-  if (!cards.length || !rows.length) return null;
+  if (!cards.length || cards.length !== galery.length) return null;
 
   return (
     <div className="galery" ref={galeryRef}>

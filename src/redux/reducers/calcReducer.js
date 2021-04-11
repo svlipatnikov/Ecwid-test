@@ -1,4 +1,4 @@
-import { IS_CHANGED, SET_GALERY_WIDTH, SET_CALC_RESULT } from '../types';
+import { SET_CALC_IS_CHANGED_FLAG, SET_GALERY_WIDTH, SET_CALC_RESULT } from 'redux/types';
 
 const calcReducerInit = {
   isChanged: true,
@@ -9,7 +9,7 @@ const calcReducerInit = {
 
 const calcReducer = (state = calcReducerInit, action) => {
   switch (action.type) {
-    case IS_CHANGED:
+    case SET_CALC_IS_CHANGED_FLAG:
       return { ...state, isChanged: true };
 
     case SET_GALERY_WIDTH:

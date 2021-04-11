@@ -1,7 +1,7 @@
 import React from 'react';
 import { imagePadding, rowMaxHeight, rowNormalHeight } from 'restrictions';
 import { useDispatch } from 'react-redux';
-import { deleteImageAction } from 'redux/actions/galeryAction';
+import { handleDeleteImageAction } from 'redux/actions/galeryAction';
 import deleteIcon from 'resources/delete.svg';
 import placeholder from 'resources/placeholder.png';
 import './imageCard.css';
@@ -29,7 +29,7 @@ export default function ImageCard({ index, url, cardNormalWidth, rowScale, isLas
   };
 
   const handleDelete = () => {
-    dispatch(deleteImageAction(index));
+    dispatch(handleDeleteImageAction(index));
   };
 
   return (

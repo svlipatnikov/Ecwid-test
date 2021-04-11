@@ -1,8 +1,8 @@
-import { IS_CHANGED, SET_CALC_RESULT, SET_GALERY_WIDTH } from 'redux/types';
+import { SET_CALC_IS_CHANGED_FLAG, SET_CALC_RESULT, SET_GALERY_WIDTH } from 'redux/types';
 import { rowNormalHeight } from 'restrictions';
 import store from 'redux/store';
 
-export const isChangedAction = () => ({ type: IS_CHANGED });
+export const isChangedCalcAction = () => ({ type: SET_CALC_IS_CHANGED_FLAG });
 
 export const setGaleryWidthAction = (galeryWidth) => ({
   type: SET_GALERY_WIDTH,
