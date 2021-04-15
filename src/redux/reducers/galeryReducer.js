@@ -1,5 +1,5 @@
 import { galleryImages } from 'resources/images';
-import { ADD_IMAGE_FROM_URL, ADD_IMAGE_FROM_JSON_FILE, DELETE_IMAGE } from 'redux/types';
+import { ADD_IMAGE, ADD_IMAGES_ARRAY, DELETE_IMAGE } from 'redux/types';
 
 const imagesReducerInit = {
   galleryImages,
@@ -7,10 +7,10 @@ const imagesReducerInit = {
 
 const imagesReducer = (state = imagesReducerInit, action) => {
   switch (action.type) {
-    case ADD_IMAGE_FROM_URL:
+    case ADD_IMAGE:
       return { ...state, galleryImages: [...state.galleryImages, action.payload] };
 
-    case ADD_IMAGE_FROM_JSON_FILE:
+    case ADD_IMAGES_ARRAY:
       return {
         ...state,
         galleryImages: [...state.galleryImages, ...action.payload],

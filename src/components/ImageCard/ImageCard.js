@@ -11,12 +11,12 @@ export default function ImageCard({ index, url, cardNormalWidth, rowScale, isLas
 
   const calcCardWidth =
     isLastRow && rowNormalHeight * rowScale > rowMaxHeight
-      ? Math.floor(rowMaxHeight * (cardNormalWidth / rowNormalHeight))
-      : Math.floor(cardNormalWidth * rowScale);
+      ? rowMaxHeight * (cardNormalWidth / rowNormalHeight)
+      : cardNormalWidth * rowScale;
   const calcCardHeight =
     isLastRow && rowNormalHeight * rowScale > rowMaxHeight
-      ? Math.floor(rowMaxHeight)
-      : Math.floor(rowNormalHeight * rowScale);
+      ? rowMaxHeight
+      : rowNormalHeight * rowScale;
 
   const cardStyle = {
     width: calcCardWidth + 'px',

@@ -6,7 +6,7 @@ export const isChangedCalcAction = () => ({ type: SET_CALC_IS_CHANGED_FLAG });
 
 export const setGaleryWidthAction = (galeryWidth) => ({
   type: SET_GALERY_WIDTH,
-  payload: galeryWidth,
+  payload: Math.ceil(galeryWidth),
 });
 
 export const setCalcResultAction = (galery) => {
@@ -37,7 +37,7 @@ export const setCalcResultAction = (galery) => {
     };
 
     // заполняем массив rowsArr
-    rowsArr[rowNumber] = rowWidth;
+    rowsArr[rowNumber] = Math.ceil(rowWidth);
   });
 
   return {

@@ -1,5 +1,5 @@
 .galery {
-  background-color: darkorange;
+  /* background-color: darkorange; */
   display: flex;
   flex-wrap: wrap;
 }

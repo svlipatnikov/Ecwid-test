@@ -1,6 +1,6 @@
 // image
-export const ADD_IMAGE_FROM_URL = 'ADD_IMAGE_FROM_URL';
-export const ADD_IMAGE_FROM_JSON_FILE = 'ADD_IMAGE_FROM_JSON_FILE';
+export const ADD_IMAGE = 'ADD_IMAGE';
+export const ADD_IMAGES_ARRAY = 'ADD_IMAGES_ARRAY';
 export const DELETE_IMAGE = 'DELETE_IMAGE';
 
 // calc
