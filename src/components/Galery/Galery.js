@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ImageCard from 'components/ImageCard';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -8,11 +8,12 @@ import {
   rowsSelector,
   galleryImagesSelector,
 } from 'redux/selectors';
-import './galery.css';
+import './galery.scss';
 import { setCalcResultAction, setGaleryWidthAction } from 'redux/actions/calcAction';
 import { addImagesFromDropAction } from 'redux/actions/galeryAction';
 
 export default function Galery() {
+  const [dropFieldClasses, setDropFieldClasses] = useState(['galery__drop-field']);
   const galery = useSelector(galleryImagesSelector);
   const galeryWidth = useSelector(galeryWidthSelector);
   const isChanged = useSelector(isChangedCalcSelector);
@@ -21,7 +22,6 @@ export default function Galery() {
   const galeryRef = useRef(null);
 
   useEffect(() => {
-    console.log('useEffect');
     if (galeryRef.current) {
       dispatch(setGaleryWidthAction(galeryRef.current.clientWidth));
     }
@@ -42,13 +42,16 @@ export default function Galery() {
   const handleDragEnter = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    // TODO on dragEnter style
+    setDropFieldClasses(['galery__drop-field', 'galery__drop-field--drop-enter']);
   };
 
   const handleDragOver = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    // TODO off dragEnter style
+  };
+
+  const handleDragLeave = () => {
+    setDropFieldClasses(['galery__drop-field']);
   };
 
   const handleDrop = (event) => {
@@ -56,16 +59,11 @@ export default function Galery() {
     event.stopPropagation();
     const files = event.dataTransfer.files;
     dispatch(addImagesFromDropAction(files));
+    setDropFieldClasses(['galery__drop-field']);
   };
 
   return (
-    <div
-      className="galery"
-      ref={galeryRef}
-      onDragEnter={handleDragEnter}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-    >
+    <div className="galery" ref={galeryRef}>
       {galery.map((image, index) => (
         <ImageCard
           key={image.url + index}
@@ -76,6 +74,14 @@ export default function Galery() {
           isLastRow={cards[index].rowNumber === rows.length - 1}
         />
       ))}
+
+      <div
+        className={dropFieldClasses.join(' ')}
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+      />
     </div>
   );
 }

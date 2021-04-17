@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addImagesFromJsonFileAction, addImageFromUrlAction } from 'redux/actions/galeryAction';
-import './loader.css';
+import './loader.scss';
 
 export default function Loader() {
   const [input, setInput] = useState('');

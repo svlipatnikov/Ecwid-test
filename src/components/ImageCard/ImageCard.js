@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { handleDeleteImageAction } from 'redux/actions/galeryAction';
 import deleteIcon from 'resources/delete.svg';
 import placeholder from 'resources/placeholder.png';
-import './imageCard.css';
+import './imageCard.scss';
 
 export default function ImageCard({ index, url, cardNormalWidth, rowScale, isLastRow }) {
   const dispatch = useDispatch();
