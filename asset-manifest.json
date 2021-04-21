@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/ecwid-test/static/css/main.0eb0386e.chunk.css",
-    "main.js": "/ecwid-test/static/js/main.bf0099d6.chunk.js",
-    "main.js.map": "/ecwid-test/static/js/main.bf0099d6.chunk.js.map",
+    "main.css": "/ecwid-test/static/css/main.97e92112.chunk.css",
+    "main.js": "/ecwid-test/static/js/main.e88242e9.chunk.js",
+    "main.js.map": "/ecwid-test/static/js/main.e88242e9.chunk.js.map",
     "runtime-main.js": "/ecwid-test/static/js/runtime-main.18d002e4.js",
     "runtime-main.js.map": "/ecwid-test/static/js/runtime-main.18d002e4.js.map",
     "static/js/2.42afc35f.chunk.js": "/ecwid-test/static/js/2.42afc35f.chunk.js",
     "static/js/2.42afc35f.chunk.js.map": "/ecwid-test/static/js/2.42afc35f.chunk.js.map",
     "index.html": "/ecwid-test/index.html",
-    "static/css/main.0eb0386e.chunk.css.map": "/ecwid-test/static/css/main.0eb0386e.chunk.css.map",
+    "static/css/main.97e92112.chunk.css.map": "/ecwid-test/static/css/main.97e92112.chunk.css.map",
     "static/js/2.42afc35f.chunk.js.LICENSE.txt": "/ecwid-test/static/js/2.42afc35f.chunk.js.LICENSE.txt",
-    "static/media/imageCard.scss": "/ecwid-test/static/media/delete.82438203.svg",
+    "static/media/delete.82438203.svg": "/ecwid-test/static/media/delete.82438203.svg",
     "static/media/dropField.scss": "/ecwid-test/static/media/download.fb1a03b5.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.18d002e4.js",
     "static/js/2.42afc35f.chunk.js",
-    "static/css/main.0eb0386e.chunk.css",
-    "static/js/main.bf0099d6.chunk.js"
+    "static/css/main.97e92112.chunk.css",
+    "static/js/main.e88242e9.chunk.js"
   ]
 }
