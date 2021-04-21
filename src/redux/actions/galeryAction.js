@@ -1,5 +1,5 @@
 import { ADD_IMAGES_ARRAY, DELETE_IMAGE, ADD_IMAGE } from 'redux/types';
-import { isChangedCalcAction } from './calcAction';
+import { setCalcResultAction } from './calcAction';
 import { newErrorAction } from './errorAction';
 
 const deleteImageAction = (deleteIndex) => ({ type: DELETE_IMAGE, payload: deleteIndex });
@@ -13,7 +13,7 @@ const addImagesFromArrayAction = (imagesArray) => ({
 
 export const handleDeleteImageAction = (deleteIndex) => (dispatch) => {
   dispatch(deleteImageAction(deleteIndex));
-  dispatch(isChangedCalcAction());
+  dispatch(setCalcResultAction());
 };
 
 export const addImageFromUrlAction = (url) => (dispatch) => {
@@ -21,7 +21,7 @@ export const addImageFromUrlAction = (url) => (dispatch) => {
   newImage.src = url;
   newImage.onload = () => {
     dispatch(addImageAction({ url, height: newImage.height, width: newImage.width }));
-    dispatch(isChangedCalcAction());
+    dispatch(setCalcResultAction());
   };
   newImage.onerror = () => {
     dispatch(newErrorAction(`Error on image loading on url: ${url}`));
@@ -29,8 +29,6 @@ export const addImageFromUrlAction = (url) => (dispatch) => {
 };
 
 export const addImagesFromDropAction = (files) => (dispatch) => {
-  console.log('addImagesFromDropAction files:', files);
-
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
     if (file.type.startsWith('image/')) {
@@ -42,7 +40,7 @@ export const addImagesFromDropAction = (files) => (dispatch) => {
 
       image.onload = () => {
         dispatch(addImageAction({ url: image.src, height: image.height, width: image.width }));
-        dispatch(isChangedCalcAction());
+        dispatch(setCalcResultAction());
       };
     } else if (file.type === 'application/json') {
       file
@@ -51,7 +49,7 @@ export const addImagesFromDropAction = (files) => (dispatch) => {
         .then((data) => {
           if (data.galleryImages) {
             dispatch(addImagesFromArrayAction(data.galleryImages));
-            dispatch(isChangedCalcAction());
+            dispatch(setCalcResultAction());
           } else {
             dispatch(
               newErrorAction(
@@ -70,8 +68,6 @@ export const addImagesFromDropAction = (files) => (dispatch) => {
 };
 
 export const addImagesFromJsonFileAction = (jsonUrl) => (dispatch) => {
-  console.log('addImageFromJsonFileAction');
-
   fetch(jsonUrl)
     .then((response) => {
       if (!response.ok) {
@@ -86,7 +82,7 @@ export const addImagesFromJsonFileAction = (jsonUrl) => (dispatch) => {
         const data = JSON.parse(text);
         if (data.galleryImages) {
           dispatch(addImagesFromArrayAction(data.galleryImages));
-          dispatch(isChangedCalcAction());
+          dispatch(setCalcResultAction());
         } else {
           dispatch(
             newErrorAction(

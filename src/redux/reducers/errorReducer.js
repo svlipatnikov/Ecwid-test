@@ -1,10 +1,10 @@
 import { ADD_NEW_ERROR, DELETE_ERROR } from 'redux/types';
 
-const initMainReducerState = {
+const errorReducerInit = {
   errors: [],
 };
 
-const errorReducer = (state = initMainReducerState, action) => {
+const errorReducer = (state = errorReducerInit, action) => {
   switch (action.type) {
     case ADD_NEW_ERROR:
       return { ...state, errors: [...state.errors, action.payload] };

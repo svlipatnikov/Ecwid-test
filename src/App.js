@@ -2,17 +2,23 @@ import DropField from 'components/DropField';
 import ErrorMessage from 'components/ErrorMessage';
 import Galery from 'components/Galery';
 import Loader from 'components/Loader';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { isChangedCalcAction } from 'redux/actions/calcAction';
+import { handleGaleryWidthAction } from 'redux/actions/calcAction';
+import './app.scss';
 
 const App = () => {
   const dispatch = useDispatch();
+  const contentRef = useRef(null);
 
   useEffect(() => {
     const resizeEvent = () => {
-      dispatch(isChangedCalcAction());
+      if (contentRef.current) {
+        dispatch(handleGaleryWidthAction(contentRef.current.clientWidth));
+      }
     };
+    resizeEvent();
+
     window.addEventListener('resize', resizeEvent);
     return () => {
       window.removeEventListener('resize', resizeEvent);
@@ -20,12 +26,12 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <div className="app" ref={contentRef}>
       <ErrorMessage />
       <Loader />
       <Galery />
       <DropField />
-    </>
+    </div>
   );
 };
 

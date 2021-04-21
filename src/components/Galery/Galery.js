@@ -1,13 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  cardsSelector,
-  galeryWidthSelector,
-  isChangedCalcSelector,
-  rowsSelector,
-} from 'redux/selectors/calcSelector';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { cardsSelector, galeryWidthSelector, rowsSelector } from 'redux/selectors/calcSelector';
 import { galleryImagesSelector } from 'redux/selectors/galerySelector';
-import { setCalcResultAction, setGaleryWidthAction } from 'redux/actions/calcAction';
 import EmptyGalery from 'components/EmptyGalery';
 import ImageCard from 'components/ImageCard';
 import './galery.scss';
@@ -15,29 +9,11 @@ import './galery.scss';
 export default function Galery() {
   const galery = useSelector(galleryImagesSelector);
   const galeryWidth = useSelector(galeryWidthSelector);
-  const isChanged = useSelector(isChangedCalcSelector);
   const cards = useSelector(cardsSelector);
   const rows = useSelector(rowsSelector);
 
-  const dispatch = useDispatch();
-  const galeryRef = useRef(null);
-
-  if (galeryRef.current && galeryRef.current.clientWidth !== galeryWidth) {
-    dispatch(setGaleryWidthAction(galeryRef.current.clientWidth));
-  }
-
-  if (isChanged) {
-    dispatch(setCalcResultAction(galery));
-  }
-
-  useEffect(() => {
-    if (galeryRef.current) {
-      dispatch(setGaleryWidthAction(galeryRef.current.clientWidth));
-    }
-  }, [dispatch, galeryRef]);
-
   return (
-    <div className="galery" ref={galeryRef}>
+    <div className="galery">
       {!cards.length && <EmptyGalery />}
 
       {!!cards.length &&

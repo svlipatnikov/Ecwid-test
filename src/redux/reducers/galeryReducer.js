@@ -1,11 +1,11 @@
 import { galleryImages } from 'assets/images';
 import { ADD_IMAGE, ADD_IMAGES_ARRAY, DELETE_IMAGE } from 'redux/types';
 
-const imagesReducerInit = {
+const galeryReducerInit = {
   galleryImages,
 };
 
-const imagesReducer = (state = imagesReducerInit, action) => {
+const galeryReducer = (state = galeryReducerInit, action) => {
   switch (action.type) {
     case ADD_IMAGE:
       return { ...state, galleryImages: [...state.galleryImages, action.payload] };
@@ -25,4 +25,4 @@ const imagesReducer = (state = imagesReducerInit, action) => {
   }
 };
 
-export default imagesReducer;
+export default galeryReducer;

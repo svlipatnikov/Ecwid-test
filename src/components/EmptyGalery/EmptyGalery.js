@@ -3,8 +3,8 @@ import './emptyGalery.scss';
 
 const EmptyGalery = () => (
   <div className="empty-galery">
-    <h2>Галерея пуста</h2>
-    <p>Введите путь к изображению / файлу *.json или перетащите их в данное поле</p>
+    <h2>Galery is empty</h2>
+    <p>Please enter url to image / json file or drop them here</p>
   </div>
 );
 
