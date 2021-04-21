@@ -10,10 +10,8 @@ export const setGaleryWidthAction = (galeryWidth) => ({
 });
 
 export const setCalcResultAction = (galery) => {
-  // get galeryWidth
   const galeryWidth = store.getState().calcReducer.galeryWidth;
 
-  // calc cardsArr & rowsArr
   const cardsArr = [];
   const rowsArr = [];
   let rowNumber = 0;
@@ -29,14 +27,12 @@ export const setCalcResultAction = (galery) => {
       rowWidth = rowWidth + cardNormalWidth;
     }
 
-    // заполняем массив cardsArr
     cardsArr[index] = {
       index,
       cardNormalWidth,
       rowNumber,
     };
 
-    // заполняем массив rowsArr
     rowsArr[rowNumber] = Math.ceil(rowWidth);
   });
 

@@ -1,11 +1,12 @@
 import { ADD_IMAGES_ARRAY, DELETE_IMAGE, ADD_IMAGE } from 'redux/types';
 import { isChangedCalcAction } from './calcAction';
+import { newErrorAction } from './errorAction';
 
 const deleteImageAction = (deleteIndex) => ({ type: DELETE_IMAGE, payload: deleteIndex });
 
 const addImageAction = (image) => ({ type: ADD_IMAGE, payload: image });
 
-const addImagesArrayAction = (imagesArray) => ({
+const addImagesFromArrayAction = (imagesArray) => ({
   type: ADD_IMAGES_ARRAY,
   payload: imagesArray,
 });
@@ -23,8 +24,7 @@ export const addImageFromUrlAction = (url) => (dispatch) => {
     dispatch(isChangedCalcAction());
   };
   newImage.onerror = () => {
-    // TODO
-    console.log('onerror img');
+    dispatch(newErrorAction(`Error on image loading on url: ${url}`));
   };
 };
 
@@ -35,14 +35,36 @@ export const addImagesFromDropAction = (files) => (dispatch) => {
     const file = files[i];
     if (file.type.startsWith('image/')) {
       const image = new Image();
-      image.src = window.URL.createObjectURL(file);
+
+      const reader = new FileReader();
+      reader.onload = () => (image.src = reader.result);
+      reader.readAsDataURL(file);
+
       image.onload = () => {
         dispatch(addImageAction({ url: image.src, height: image.height, width: image.width }));
         dispatch(isChangedCalcAction());
       };
+    } else if (file.type === 'application/json') {
+      file
+        .text()
+        .then((text) => JSON.parse(text))
+        .then((data) => {
+          if (data.galleryImages) {
+            dispatch(addImagesFromArrayAction(data.galleryImages));
+            dispatch(isChangedCalcAction());
+          } else {
+            dispatch(
+              newErrorAction(
+                'Not supported file data. Json file should contain "galleryImages" array'
+              )
+            );
+          }
+        })
+        .catch((error) => {
+          dispatch(newErrorAction(`Error in json file parsing: ${error}`));
+        });
     } else {
-      // TODO
-      console.log(`${file.name} - is not supported file type`);
+      dispatch(newErrorAction(`${file.name} - file type is not supported`));
     }
   }
 };
@@ -63,19 +85,20 @@ export const addImagesFromJsonFileAction = (jsonUrl) => (dispatch) => {
       if (text !== '') {
         const data = JSON.parse(text);
         if (data.galleryImages) {
-          dispatch(addImagesArrayAction(data.galleryImages));
+          dispatch(addImagesFromArrayAction(data.galleryImages));
           dispatch(isChangedCalcAction());
         } else {
-          // TODO
-          console.log(`Not supported file data. Json file should contain "galleryImages" array`);
+          dispatch(
+            newErrorAction(
+              'Not supported file data. Json file should contain "galleryImages" array'
+            )
+          );
         }
       } else {
-        // TODO
-        console.log('Emty response data. Json file should contain "galleryImages" array');
+        dispatch(newErrorAction('Emty file data. Json file should contain "galleryImages" array'));
       }
     })
     .catch((error) => {
-      // TODO
-      console.log('error', error);
+      dispatch(newErrorAction(`Error in fetch: ${error}`));
     });
 };

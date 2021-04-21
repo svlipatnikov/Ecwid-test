@@ -2,8 +2,8 @@ import React from 'react';
 import { imagePadding, rowMaxHeight, rowNormalHeight } from 'restrictions';
 import { useDispatch } from 'react-redux';
 import { handleDeleteImageAction } from 'redux/actions/galeryAction';
-import deleteIcon from 'resources/delete.svg';
-import placeholder from 'resources/placeholder.png';
+import deleteIcon from 'assets/delete.svg';
+import placeholder from 'assets/placeholder.png';
 import './imageCard.scss';
 
 export default function ImageCard({ index, url, cardNormalWidth, rowScale, isLastRow }) {
@@ -11,7 +11,7 @@ export default function ImageCard({ index, url, cardNormalWidth, rowScale, isLas
 
   const calcCardWidth =
     isLastRow && rowNormalHeight * rowScale > rowMaxHeight
-      ? rowMaxHeight * (cardNormalWidth / rowNormalHeight)
+      ? cardNormalWidth * (rowMaxHeight / rowNormalHeight)
       : cardNormalWidth * rowScale;
   const calcCardHeight =
     isLastRow && rowNormalHeight * rowScale > rowMaxHeight
@@ -41,7 +41,7 @@ export default function ImageCard({ index, url, cardNormalWidth, rowScale, isLas
         height={calcCardHeight - imagePadding * 2 + 'px'}
         style={imgStyle}
       />
-      <button className="card__delete" onClick={handleDelete}>
+      <button className="card__delete-btn" onClick={handleDelete}>
         <img src={deleteIcon} alt="Delete" />
       </button>
     </div>

@@ -1,17 +1,22 @@
+$background-color: #78e2e6;
+
 .loader {
-  background-color: darkkhaki;
+  background-color: $background-color;
   padding: 30px;
-}
+  margin-bottom: 5px;
 
-.loader__form {
-  display: flex;
-  flex-wrap: nowrap;
-}
+  &__form {
+    display: flex;
+    flex-wrap: nowrap;
 
-.loader__form__input {
-  width: 100%;
-  margin-right: 10px;
+    &__input {
+      width: 100%;
+      margin-right: 10px;
+      z-index: 1;
+    }
+
+    &__button {
+      z-index: 1;
+    }
+  }
 }
-/* 
-.loader__form__button {
-} */

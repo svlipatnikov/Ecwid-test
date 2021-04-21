@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { newErrorAction } from 'redux/actions/errorAction';
 import { addImagesFromJsonFileAction, addImageFromUrlAction } from 'redux/actions/galeryAction';
 import './loader.scss';
 
@@ -9,15 +10,14 @@ export default function Loader() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (isImageUrl(input)) {
+    if (input === '') {
+      dispatch(newErrorAction('Please enter image url or json file url'));
+    } else if (isImageUrl(input)) {
       dispatch(addImageFromUrlAction(input));
-    } else if (isServerJsonFile(input)) {
-      dispatch(addImagesFromJsonFileAction(input));
-    } else if (isLocalJsonFile(input)) {
+    } else if (isJsonFile(input)) {
       dispatch(addImagesFromJsonFileAction(input));
     } else {
-      // TODO err input
-      console.log('Not supported. Please enter image url or json file url');
+      dispatch(newErrorAction('Not supported url. Please enter image url or json file url'));
     }
     setInput('');
   };
@@ -29,7 +29,13 @@ export default function Loader() {
   return (
     <div className="loader">
       <form className="loader__form" onSubmit={handleSubmit}>
-        <input type="text" className="loader__form__input" onChange={handleInput} value={input} />
+        <input
+          type="text"
+          placeholder="Put here url to image or json file"
+          className="loader__form__input"
+          onChange={handleInput}
+          value={input}
+        />
         <button className="loader__form__button">Загрузить</button>
       </form>
     </div>
@@ -41,12 +47,7 @@ const isImageUrl = (url) => {
   return !!regExpImage.exec(url);
 };
 
-const isServerJsonFile = (url) => {
+const isJsonFile = (url) => {
   const regExpJson = /^https?:\/\/.+\.json$/gi;
-  return !!regExpJson.exec(url);
-};
-
-const isLocalJsonFile = (url) => {
-  const regExpJson = /^file:\/\/\/.+\.json$/gi;
   return !!regExpJson.exec(url);
 };

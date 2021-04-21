@@ -1,3 +1,5 @@
+import DropField from 'components/DropField';
+import ErrorMessage from 'components/ErrorMessage';
 import Galery from 'components/Galery';
 import Loader from 'components/Loader';
 import React, { useEffect } from 'react';
@@ -19,8 +21,10 @@ const App = () => {
 
   return (
     <>
+      <ErrorMessage />
       <Loader />
       <Galery />
+      <DropField />
     </>
   );
 };

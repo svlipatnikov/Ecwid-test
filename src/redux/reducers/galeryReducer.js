@@ -1,4 +1,4 @@
-import { galleryImages } from 'resources/images';
+import { galleryImages } from 'assets/images';
 import { ADD_IMAGE, ADD_IMAGES_ARRAY, DELETE_IMAGE } from 'redux/types';
 
 const imagesReducerInit = {
