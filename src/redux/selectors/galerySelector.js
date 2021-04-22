@@ -1,1 +1,1 @@
-export const galleryImagesSelector = (store) => store.galeryReducer.galleryImages;
+export const gallerySelector = (store) => store.galeryReducer.galleryImages;

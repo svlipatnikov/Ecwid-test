@@ -1,4 +1,4 @@
-import { SET_GALERY_WIDTH, SET_CALC_RESULT } from 'redux/types';
+import { SET_CALC_RESULT } from 'redux/types';
 
 const calcReducerInit = {
   galeryWidth: window.innerWidth,
@@ -8,9 +8,6 @@ const calcReducerInit = {
 
 const calcReducer = (state = calcReducerInit, action) => {
   switch (action.type) {
-    case SET_GALERY_WIDTH:
-      return { ...state, galeryWidth: action.payload };
-
     case SET_CALC_RESULT:
       return { ...state, ...action.payload };
 

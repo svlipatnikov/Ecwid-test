@@ -1,5 +1,5 @@
 import { ADD_IMAGES_ARRAY, DELETE_IMAGE, ADD_IMAGE } from 'redux/types';
-import { setCalcResultAction } from './calcAction';
+import { calcAction } from './calcAction';
 import { newErrorAction } from './errorAction';
 
 const deleteImageAction = (deleteIndex) => ({ type: DELETE_IMAGE, payload: deleteIndex });
@@ -13,7 +13,7 @@ const addImagesFromArrayAction = (imagesArray) => ({
 
 export const handleDeleteImageAction = (deleteIndex) => (dispatch) => {
   dispatch(deleteImageAction(deleteIndex));
-  dispatch(setCalcResultAction());
+  dispatch(calcAction());
 };
 
 export const addImageFromUrlAction = (url) => (dispatch) => {
@@ -21,7 +21,7 @@ export const addImageFromUrlAction = (url) => (dispatch) => {
   newImage.src = url;
   newImage.onload = () => {
     dispatch(addImageAction({ url, height: newImage.height, width: newImage.width }));
-    dispatch(setCalcResultAction());
+    dispatch(calcAction());
   };
   newImage.onerror = () => {
     dispatch(newErrorAction(`Error on image loading on url: ${url}`));
@@ -40,7 +40,7 @@ export const addImagesFromDropAction = (files) => (dispatch) => {
 
       image.onload = () => {
         dispatch(addImageAction({ url: image.src, height: image.height, width: image.width }));
-        dispatch(setCalcResultAction());
+        dispatch(calcAction());
       };
     } else if (file.type === 'application/json') {
       file
@@ -49,7 +49,7 @@ export const addImagesFromDropAction = (files) => (dispatch) => {
         .then((data) => {
           if (data.galleryImages) {
             dispatch(addImagesFromArrayAction(data.galleryImages));
-            dispatch(setCalcResultAction());
+            dispatch(calcAction());
           } else {
             dispatch(
               newErrorAction(
@@ -82,7 +82,7 @@ export const addImagesFromJsonFileAction = (jsonUrl) => (dispatch) => {
         const data = JSON.parse(text);
         if (data.galleryImages) {
           dispatch(addImagesFromArrayAction(data.galleryImages));
-          dispatch(setCalcResultAction());
+          dispatch(calcAction());
         } else {
           dispatch(
             newErrorAction(

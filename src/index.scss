@@ -3,10 +3,14 @@ body {
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  overflow: scroll;
+  margin: 0 auto;
+  max-width: 860px;
+  min-width: 320px;
 }
 
 #root {
-  max-width: 860px;
-  min-width: 320px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: inherit;
 }

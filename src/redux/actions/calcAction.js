@@ -1,23 +1,11 @@
-import { SET_CALC_RESULT, SET_GALERY_WIDTH } from 'redux/types';
+import { SET_CALC_RESULT } from 'redux/types';
 import { rowNormalHeight } from 'restrictions';
 import store from 'redux/store';
 
-const setGaleryWidthAction = (galeryWidth) => ({
-  type: SET_GALERY_WIDTH,
-  payload: Math.ceil(galeryWidth),
-});
-
-export const handleGaleryWidthAction = (newWidth) => (dispatch) => {
-  const galeryWidth = store.getState().calcReducer.galeryWidth;
-  if (newWidth !== galeryWidth) {
-    dispatch(setGaleryWidthAction(newWidth));
-    dispatch(setCalcResultAction());
-  }
-};
-
-export const setCalcResultAction = () => {
+export const calcAction = () => {
   const galery = store.getState().galeryReducer.galleryImages;
-  const galeryWidth = store.getState().calcReducer.galeryWidth;
+
+  const galeryWidth = Math.ceil(document.body.scrollWidth);
 
   const cardsArr = [];
   const rowsArr = [];
@@ -45,6 +33,6 @@ export const setCalcResultAction = () => {
 
   return {
     type: SET_CALC_RESULT,
-    payload: { cardsArr, rowsArr },
+    payload: { galeryWidth, cardsArr, rowsArr },
   };
 };

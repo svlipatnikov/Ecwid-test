@@ -8,5 +8,4 @@ export const ADD_IMAGES_ARRAY = 'ADD_IMAGES_ARRAY';
 export const DELETE_IMAGE = 'DELETE_IMAGE';
 
 // calc
-export const SET_GALERY_WIDTH = 'SET_GALERY_WIDTH';
 export const SET_CALC_RESULT = 'SET_CALC_RESULT';

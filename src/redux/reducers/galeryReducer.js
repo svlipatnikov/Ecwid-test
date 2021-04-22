@@ -1,8 +1,7 @@
-import { galleryImages } from 'assets/images';
 import { ADD_IMAGE, ADD_IMAGES_ARRAY, DELETE_IMAGE } from 'redux/types';
 
 const galeryReducerInit = {
-  galleryImages,
+  galleryImages: [],
 };
 
 const galeryReducer = (state = galeryReducerInit, action) => {

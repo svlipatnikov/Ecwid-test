@@ -5,16 +5,20 @@
   justify-content: center;
   align-items: center;
 
+  &__image {
+    background: #ffffff url('../../assets/placeholder.png') cover;
+  }
+
   &__delete-btn {
     position: absolute;
     bottom: 5px;
     right: 5px;
 
     z-index: 1;
-    opacity: 30%;
+    opacity: 0.3;
 
     &:hover {
-      opacity: 100%;
+      opacity: 1;
     }
   }
 }

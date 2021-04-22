@@ -11,7 +11,7 @@ $background-color: #78e2e6;
   &--drop-enter {
     background: $background-color url('../../assets/download.svg') no-repeat;
     background-position: center;
-    opacity: 40%;
+    opacity: 0.4;
     z-index: 2;
   }
 }
