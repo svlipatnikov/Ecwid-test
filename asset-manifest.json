@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/ecwid-test/static/css/main.db183e73.chunk.css",
-    "main.js": "/ecwid-test/static/js/main.16311a29.chunk.js",
-    "main.js.map": "/ecwid-test/static/js/main.16311a29.chunk.js.map",
+    "main.css": "/ecwid-test/static/css/main.431c2b94.chunk.css",
+    "main.js": "/ecwid-test/static/js/main.bdbde115.chunk.js",
+    "main.js.map": "/ecwid-test/static/js/main.bdbde115.chunk.js.map",
     "runtime-main.js": "/ecwid-test/static/js/runtime-main.18d002e4.js",
     "runtime-main.js.map": "/ecwid-test/static/js/runtime-main.18d002e4.js.map",
     "static/js/2.42afc35f.chunk.js": "/ecwid-test/static/js/2.42afc35f.chunk.js",
     "static/js/2.42afc35f.chunk.js.map": "/ecwid-test/static/js/2.42afc35f.chunk.js.map",
     "index.html": "/ecwid-test/index.html",
-    "static/css/main.db183e73.chunk.css.map": "/ecwid-test/static/css/main.db183e73.chunk.css.map",
+    "static/css/main.431c2b94.chunk.css.map": "/ecwid-test/static/css/main.431c2b94.chunk.css.map",
     "static/js/2.42afc35f.chunk.js.LICENSE.txt": "/ecwid-test/static/js/2.42afc35f.chunk.js.LICENSE.txt",
     "static/media/delete.82438203.svg": "/ecwid-test/static/media/delete.82438203.svg",
     "static/media/dropField.scss": "/ecwid-test/static/media/download.fb1a03b5.svg"
@@ -16,7 +16,7 @@
   "entrypoints": [
     "static/js/runtime-main.18d002e4.js",
     "static/js/2.42afc35f.chunk.js",
-    "static/css/main.db183e73.chunk.css",
-    "static/js/main.16311a29.chunk.js"
+    "static/css/main.431c2b94.chunk.css",
+    "static/js/main.bdbde115.chunk.js"
   ]
 }
