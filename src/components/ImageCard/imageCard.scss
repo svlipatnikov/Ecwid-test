@@ -6,7 +6,8 @@
   align-items: center;
 
   &__image {
-    background: #ffffff url('../../assets/placeholder.png') cover;
+    background-image: url('../../assets/placeholder.png');
+    background-size: cover;
   }
 
   &__delete-btn {
